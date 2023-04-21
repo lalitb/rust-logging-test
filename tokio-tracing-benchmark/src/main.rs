@@ -9,6 +9,14 @@ mod custom_layer;
 use custom_layer::CustomLayer;
 use custom_layer::NoopCustomLayer;
 
+/*
+Result :
+no logging subscriber: info with structure data (5.0s) ...           0.274 ns/iter (0.989 R²)
+no logging subscriber: info with unstructured data (5.0s) ...           0.483 ns/iter (0.997 R²)
+noop logging subscriber: info with structure data (5.0s) ...          12.172 ns/iter (0.997 R²)
+noop logging subscriber: info with unstructured data (5.0s) ...           9.727 ns/iter (0.990 R²)
+
+ */
 fn main() {
 
     let options: Options = Options::default();
