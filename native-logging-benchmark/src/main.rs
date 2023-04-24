@@ -13,6 +13,8 @@ fn expensive_call() -> Data {
 
 fn main() {
     let options: Options = Options::default();
+    microbench::bench(&options, "logs_enabled - Default", || log_enabled!(Debug));
+    microbench::bench(&options, "logs_enabled - Component", || log_enabled!(target:"Global", Debug));
     if log_enabled!(Debug) {
         let data = expensive_call();
         debug!("expensive debug data: {} {}", data.x, data.y);
