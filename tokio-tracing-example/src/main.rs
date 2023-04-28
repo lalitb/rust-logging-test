@@ -23,7 +23,7 @@ fn main() {
     let layer = CustomLayer {}.with_filter(filter);
     tracing_subscriber::registry().with(layer).init();
 
-    info!("test123"); //default target as module path/name
+    info!( "test123"); //default target as module path/name
 
     info!(target: "target1", "something has happened");
 
