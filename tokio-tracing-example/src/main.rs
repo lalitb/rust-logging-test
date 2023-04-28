@@ -44,4 +44,8 @@ fn main() {
     );
 
      // level_enabled is not public
+     // if level_enabled!(level) {
+     //    info!();
+     // }
+     }
 }
