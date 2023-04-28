@@ -1,5 +1,9 @@
-use tracing::{event, info, Level, level_enabled };
+use std::ops::Deref;
+
+use tracing::{event, info, level_enabled, Level};
+use tracing_subscriber::filter::LevelFilter;
 use tracing_subscriber::prelude::*;
+use tracing_subscriber::reload;
 use tracing_subscriber::EnvFilter;
 
 mod custom_layer;
@@ -10,10 +14,11 @@ struct User {
 }
 
 fn main() {
-
     let filter = EnvFilter::from_default_env()
         .add_directive("target1=error".parse().unwrap())
         .add_directive(Level::INFO.into());
+
+    let (filter, reload_handle) = reload::Layer::new(filter);
 
     let layer = CustomLayer {}.with_filter(filter);
     tracing_subscriber::registry().with(layer).init();
@@ -43,9 +48,17 @@ fn main() {
         "Successful login for {{username}} and {{email}}"
     );
 
-     // level_enabled is not public
-     // if level_enabled!(level) {
-     //    info!();
-     // }
-     }
+    // level_enabled is not public
+    // if level_enabled!(level) {
+    //    info!();
+    // }
+
+    // change level at runtime
+    let filter2 = EnvFilter::from_default_env()
+        .add_directive("target1=error".parse().unwrap())
+        .add_directive(Level::ERROR.into());
+
+    reload_handle.modify(|filter| *filter = filter2).unwrap();
+
+    info!("This is not logged..");
 }
