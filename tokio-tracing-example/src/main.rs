@@ -1,4 +1,4 @@
-use tracing::{event, info, Level};
+use tracing::{event, info, Level, level_enabled };
 use tracing_subscriber::prelude::*;
 use tracing_subscriber::EnvFilter;
 
@@ -10,6 +10,7 @@ struct User {
 }
 
 fn main() {
+
     let filter = EnvFilter::from_default_env()
         .add_directive("target1=error".parse().unwrap())
         .add_directive(Level::INFO.into());
@@ -31,7 +32,7 @@ fn main() {
     info!(target: "target2", event_id = 2, event_name = "event_name", user.name, user.email);
 
     //stuct field using key-value part of arguments
-    info!(target: "target2", event_id = 2, event_name = "event_name", user.name, user.email);
+    info!(target: "target2", event_id = 2, event_name = "event_name", user_name = "ferris", user_email = "ferris@rust-lang.org");
 
     //message template using escape
     info!(
@@ -41,4 +42,6 @@ fn main() {
         email = "test123",
         "Successful login for {{username}} and {{email}}"
     );
+
+     // level_enabled is not public
 }
