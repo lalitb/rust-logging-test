@@ -11,6 +11,7 @@ where
         event: &tracing::Event<'_>,
         _ctx: tracing_subscriber::layer::Context<'_, S>,
     ) {
+
         println!("Got event!");
         println!("  level={:?}", event.metadata().level());
         println!("  target={:?}", event.metadata().target());
@@ -19,6 +20,12 @@ where
 
         let mut visitor = PrintlnVisitor;
         event.record(&mut visitor);
+    }
+
+    fn event_enabled(&self, event: &tracing::Event<'_>, _ctx: tracing_subscriber::layer::Context<'_, S>) -> bool {
+
+        println!("---->Metadata level---->: {} - {}", event.metadata().target(), event.metadata().level());
+        true
     }
 }
 
