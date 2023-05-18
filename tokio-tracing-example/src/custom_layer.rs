@@ -27,9 +27,10 @@ where
         _ctx: tracing_subscriber::layer::Context<'_, S>,
     ) -> bool {
         println!(
-            "---->Metadata level---->: {} - {}",
+            "---->Metadata level---->: {} - {} -- {}",
             event.metadata().target(),
-            event.metadata().level()
+            event.metadata().level(),
+            event.metadata().name()
         );
         true
     }
