@@ -27,9 +27,10 @@ Following attributes are recommended to be provided as argument to these macros
         - Component/subsystem emitting the logs. (say payment-system, auth-system)
         - The log-stream/category this log belongs to. (say data-plane, control-plane, heartbeat)
     - Mapped to Part-A name in CS, env_name in Dgrep.
-    - If missing, the default name would be "Logs"
+    - If missing, the default name would be "Log"
+    - TODO to decide - By default, all the logs would go to "Log" table, unless configured as an Exporter option.
 
-### Example for unstructured logs:
+### Example for unstructured logs - NOT RECOMMENDED
 
 ```rust
   warn!( target: "payment-system", event_id = 10, event_name = "payment-failure", "Payment was not successful!");
@@ -50,6 +51,6 @@ Following attributes are recommended to be provided as argument to these macros
 
 ```rust
   info!(target: "auth-system", event_id = 21, event_name = "auth-success", user_name = "ferris", user_email = "ferris@rust-lang.org",
-      "Successful login for {{username}} and {{email}}" );
+      "Successful login for {{user_name}} and {{user_email}}" );
 ```
 
