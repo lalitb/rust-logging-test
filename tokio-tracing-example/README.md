@@ -13,7 +13,7 @@ Logs can be
 - **structured** - specified as key-value pair, with optional message-template field 
 - **unstructured** - specified as plain text
 
-**It is recommended to use structured logging should be used whenever possible**
+**It is recommended to use structured logging**
 
 Following attributes are recommended to be provided as argument to these macros
 
