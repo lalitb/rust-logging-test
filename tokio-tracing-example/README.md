@@ -10,19 +10,20 @@ Tokio tracing event API would be used to record the log events. Following macros
 - tracing::debug!
 
 Logs can be 
-- structured (specified as key-value pair) with optional message-template field 
-- unstructured (specified as plain text)
-In general, structured logging should be used whenever possible.
+- **structured** - specified as key-value pair, with optional message-template field 
+- **unstructured** - specified as plain text
+
+**It is recommended to use structured logging should be used whenever possible**
 
 Following attributes are recommended to be provided as argument to these macros
 
-- event_id = \<int64\>
+- **event_id** = \<int64\>
     - A durable numerical identifier, that can be used to differentiate logs from each other. 
     - Mapped to Part-B eventId
-- event_name = \<string\>
+- **event_name** = \<string\>
     - Short event identifier that describes an event (E.g, PaymentCompleted, MouseClicked)
     - Mapped to Part-B name
-- target = \<string\>
+- **target** = \<string\>
     - This is to categorize the logs in separate tables/buckets at backend. It can represent
         - Component/subsystem emitting the logs. (say payment-system, auth-system)
         - The log-stream/category this log belongs to. (say data-plane, control-plane, heartbeat)
